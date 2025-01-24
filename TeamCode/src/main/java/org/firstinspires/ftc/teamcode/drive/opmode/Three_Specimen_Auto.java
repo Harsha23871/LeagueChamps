@@ -159,7 +159,7 @@ public class    Three_Specimen_Auto extends LinearOpMode {
             TrajectorySequence backalittle3 = drive.trajectorySequenceBuilder(FirstPushTest.end())
                 .back(15)
                 .build();
-
+//guuj
         TrajectorySequence SecondPush =  drive.trajectorySequenceBuilder(trajectory3.end())
 
                 .lineToLinearHeading(new Pose2d(33.59, -40, Math.toRadians(270)))
