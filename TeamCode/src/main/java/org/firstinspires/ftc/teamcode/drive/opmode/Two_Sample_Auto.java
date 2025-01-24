@@ -82,7 +82,7 @@ public class Two_Sample_Auto extends LinearOpMode {
         TrajectorySequence ThirdScore = drive.trajectorySequenceBuilder(ThirdGrab.end())
                 .lineToLinearHeading(new Pose2d(-57, -59, Math.toRadians(45)))
                 .build();
-
+//
 
 
 

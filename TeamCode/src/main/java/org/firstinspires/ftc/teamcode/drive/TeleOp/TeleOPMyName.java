@@ -153,7 +153,7 @@ public class TeleOPMyName extends LinearOpMode {
 
             //game pad 1
             double axial = -gamepad1.left_stick_y;  // Note: pushing stick forward gives negative value
-            double lateral = gamepad1.left_stick_x;
+            double lateral = gamepad1.left_stick_x;//
             double yaw = gamepad1.right_stick_x;
             double slidePower = -gamepad2.right_stick_y;
 //            double alpha = -gamepad2.right_stick_y;
