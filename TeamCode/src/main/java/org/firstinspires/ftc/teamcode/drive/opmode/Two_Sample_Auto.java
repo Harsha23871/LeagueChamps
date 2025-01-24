@@ -83,7 +83,7 @@ public class Two_Sample_Auto extends LinearOpMode {
                 .lineToLinearHeading(new Pose2d(-57, -59, Math.toRadians(45)))
                 .build();
 //
-
+//
 
 
 // add function similar to a trajectory but for arm and wrist motors like function close()
