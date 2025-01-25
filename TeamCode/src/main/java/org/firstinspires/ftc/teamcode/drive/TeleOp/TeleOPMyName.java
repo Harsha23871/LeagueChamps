@@ -247,7 +247,7 @@ public class TeleOPMyName extends LinearOpMode {
                 armMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);}
 /*elevator.setPower();*/
 
-
+//
            if (gamepad2.dpad_left)
                wrist.setPosition(0.5);
            if (gamepad2.dpad_right)
