@@ -19,7 +19,13 @@ public class    Three_Specimen_Auto extends LinearOpMode {
     public DcMotor elevator = null;
     public Servo claw,wrist = null;
 
-
+//    public void ElevatorScoreUp() { // Need to add Elevator score down they cant be in the same function as score because traj in middle
+//        wrist.setPosition(0);
+//        elevator.setTargetPosition(2000);                  //FIRST SPECIMEN old:2000 put to all others
+//        elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION); ///////////// Reduced by 1000
+//        elevator.setPower(0.6);
+//
+//    }
 
     public void runOpMode() {
         elevator = hardwareMap.get(DcMotor.class,"elevator_motor");
@@ -29,7 +35,8 @@ public class    Three_Specimen_Auto extends LinearOpMode {
         elevator.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
 
-//        hwMapForAuto.elevator_Scoring_Pos();  // Moves elevator to scoring position
+
+        //        hwMapForAuto.elevator_Scoring_Pos();  // Moves elevator to scoring position
 //        hwMapForAuto.elevator_Resting_Pos();
         //elevator = hardwareMap.get(DcMotor.class,"elevator_motor");
         claw.setDirection(Servo.Direction.FORWARD);
@@ -47,9 +54,9 @@ public class    Three_Specimen_Auto extends LinearOpMode {
         drive.setPoseEstimate(startPose);
         // to the submersible
         TrajectorySequence trajectory0 = drive.trajectorySequenceBuilder(new Pose2d(11, -61, Math.toRadians(270.00)))
-                .splineToConstantHeading(new Vector2d(-8, -29), Math.toRadians(34.39),
-                     SampleMecanumDrive.getVelocityConstraint(30, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
-                     SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
+                .splineToConstantHeading(new Vector2d(-8, -31), Math.toRadians(34.39),
+                    SampleMecanumDrive.getVelocityConstraint(43.22, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
+                    SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
                 )
                 .build();
         //to the parking zone
@@ -62,8 +69,17 @@ public class    Three_Specimen_Auto extends LinearOpMode {
 
 
         TrajectorySequence trajectory1uhoh = drive.trajectorySequenceBuilder(new Pose2d(-0.07, -33.74, Math.toRadians(270)))
-                .lineToLinearHeading(new Pose2d(40, -64, Math.toRadians(95)))
+                .lineToLinearHeading(new Pose2d(40, -64, Math.toRadians(95)),
+
+        SampleMecanumDrive.getVelocityConstraint(40, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
+                SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
+                )
                 .build();
+
+        TrajectorySequence trajectory1uhohtest = drive.trajectorySequenceBuilder(new Pose2d(0.00, -33.00, Math.toRadians(270.00)))
+                .splineToLinearHeading(new Pose2d(40.00, -64.00, Math.toRadians(95.00)), Math.toRadians(0.00))
+                .build();
+
 
 
         TrajectorySequence park = drive.trajectorySequenceBuilder(new Pose2d(-0.07, -33.74, Math.toRadians(270.00)))
@@ -78,11 +94,13 @@ public class    Three_Specimen_Auto extends LinearOpMode {
 
         TrajectorySequence trajectory3 = drive.trajectorySequenceBuilder(trajectory1uhoh.end())
 
-                .lineToLinearHeading(new Pose2d(-5, -31, Math.toRadians(270.00)))
+                .lineToLinearHeading(new Pose2d(-7, -29, Math.toRadians(-90))) // 270 (-5) try normal 90
+
                 .build();
 
         TrajectorySequence trajectory4 = drive.trajectorySequenceBuilder(trajectory1uhoh.end())
-                .lineToLinearHeading(new Pose2d(0, -31, Math.toRadians(270.00)))
+                .lineToLinearHeading(new Pose2d(-5, -29, Math.toRadians(-90))) // 270 (-3) try normal 90
+
                 .build();
 
         //back a little after trajectory 2
@@ -99,7 +117,7 @@ public class    Three_Specimen_Auto extends LinearOpMode {
        TrajectorySequence FirstPush = drive.trajectorySequenceBuilder(trajectory0.end())
                 .lineToLinearHeading(new Pose2d(33.59, -47.38, Math.toRadians(90)))
                 .lineToConstantHeading(new Vector2d(33.59, -4.37))
-                .lineToConstantHeading(new Vector2d(40, -4.37))
+                .lineToConstantHeading(new Vector2d(43, -4.37))
                 .lineTo(new Vector2d(47, -55))//y = - 64
                 .lineTo(new Vector2d(37, -53))//y = - 64
                 .lineTo(new Vector2d(37, -64))//y = - 64
@@ -110,7 +128,6 @@ public class    Three_Specimen_Auto extends LinearOpMode {
                .lineTo(new Vector2d(58.21, -9.71))
                .lineTo(new Vector2d(55.24, -58.65))
                .build();
-
 
         //First Push alternative that poushes two
         TrajectorySequence TwoPush = drive.trajectorySequenceBuilder(new Pose2d(0.22, -28.99, Math.toRadians(90.00)))
@@ -168,61 +185,66 @@ public class    Three_Specimen_Auto extends LinearOpMode {
                 .build();
 
         wrist.setPosition(0);
-            elevator.setTargetPosition(1000);                  //FIRST SPECIMEN old:2000 put to all others
+            elevator.setTargetPosition(2000);                  //FIRST SPECIMEN old:2000 put to all others
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION); ///////////// Reduced by 1000
-        elevator.setPower(0.6);
+        elevator.setPower(0.8);
         drive.followTrajectorySequence(trajectory0);
-            elevator.setTargetPosition(800); //old: 1400 put to all others reduced by 600
+            elevator.setTargetPosition(900); //old: 1400 put to all others reduced by 600
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        elevator.setPower(0.6);
-        sleep(500);
+        elevator.setPower(0.8);
+        sleep(1000);
         claw.setPosition(0.7);
         elevator.setTargetPosition(0);
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        elevator.setPower(0.6);
+        elevator.setPower(0.8);
 
 //     claw position 1 is close
         //0.7 is open
         //RETURN TO WALL AND INTAKE
        drive.followTrajectorySequence(FirstPush);
+
+        sleep(500); // added sleep recent change // may change
+
       // drive.followTrajectorySequence(SecondFirstPush );
         elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         sleep(500);
         claw.setPosition(1);
-        elevator.setTargetPosition(2100);                 //BACK TO SUBMERSIBLE
+        elevator.setTargetPosition(2000);                 //BACK TO SUBMERSIBLE
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION); //2nd SPECIMEN SCORED
-        elevator.setPower(0.6);
+        elevator.setPower(0.8);
+
         sleep(500);
+
         drive.followTrajectorySequence(trajectory3);
         //drive.followTrajectorySequence(backalittle2);
-        elevator.setTargetPosition(1400);
+        elevator.setTargetPosition(900);
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        elevator.setPower(0.6);
-        sleep(500);
-        claw.setPosition(0.7);
+        elevator.setPower(0.8);
+        sleep(750);
+        claw.setPosition(0.6);
         elevator.setTargetPosition(0);
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        elevator.setPower(0.6);
+        elevator.setPower(0.8);
         sleep(500);
-        drive.followTrajectorySequence(trajectory1uhoh);
+        drive.followTrajectorySequence(trajectory1uhohtest);
         elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         //drive.followTrajectorySequence(backalittle);
         sleep(500);
         claw.setPosition(1);
-        elevator.setTargetPosition(2100);
+        elevator.setTargetPosition(2000);
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        elevator.setPower(0.6);
+        elevator.setPower(0.8);
         sleep(500);
         drive.followTrajectorySequence(trajectory4);
         //drive.followTrajectorySequence(backalittle2);
-        elevator.setTargetPosition(1400);
+        elevator.setTargetPosition(900);
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        elevator.setPower(0.6);
-        sleep(500);
-        claw.setPosition(0.7);
+        elevator.setPower(0.8);
+        sleep(750);
+        claw.setPosition(0.6);
         elevator.setTargetPosition(0);
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        elevator.setPower(0.6);
+        elevator.setPower(0.8);
         //drive.followTrajectorySequence(SecondPush);
         drive.followTrajectorySequence(park);
 
