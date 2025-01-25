@@ -249,9 +249,9 @@ public class TeleOPMyName extends LinearOpMode {
 
 
            if (gamepad2.dpad_left)
-               wrist.setPosition(1);
+               wrist.setPosition(0.5);
            if (gamepad2.dpad_right)
-               wrist.setPosition(0.4);
+               wrist.setPosition(0);
 //            if(gamepad1.b)
 //                intakeClaw.setPosition(1);
 //            if(gamepad1.x)
@@ -261,6 +261,8 @@ public class TeleOPMyName extends LinearOpMode {
                 claw.setDirection(Servo.Direction.FORWARD);
                 claw.setPosition(0.7);
                 intakeClaw.setPosition(0.5);
+                sleep(250);
+                wrist.setPosition(0);
             } else {
                 claw.setPosition(1);
                 intakeClaw.setPosition(1);

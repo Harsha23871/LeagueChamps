@@ -54,8 +54,8 @@ public class    Three_Specimen_Auto extends LinearOpMode {
         drive.setPoseEstimate(startPose);
         // to the submersible
         TrajectorySequence trajectory0 = drive.trajectorySequenceBuilder(new Pose2d(11, -61, Math.toRadians(270.00)))
-                .splineToConstantHeading(new Vector2d(-8, -31), Math.toRadians(34.39),
-                    SampleMecanumDrive.getVelocityConstraint(43.22, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
+                .splineToConstantHeading(new Vector2d(-8, -27), Math.toRadians(34.39),
+                    SampleMecanumDrive.getVelocityConstraint(35, DriveConstants.MAX_ANG_VEL, DriveConstants.TRACK_WIDTH),
                     SampleMecanumDrive.getAccelerationConstraint(DriveConstants.MAX_ACCEL)
                 )
                 .build();
@@ -99,7 +99,8 @@ public class    Three_Specimen_Auto extends LinearOpMode {
                 .build();
 
         TrajectorySequence trajectory4 = drive.trajectorySequenceBuilder(trajectory1uhoh.end())
-                .lineToLinearHeading(new Pose2d(-5, -29, Math.toRadians(-90))) // 270 (-3) try normal 90
+                .lineToLinearHeading(new Pose2d(-9, -29, Math.toRadians(-90)))
+                .back(5)
 
                 .build();
 
@@ -119,8 +120,8 @@ public class    Three_Specimen_Auto extends LinearOpMode {
                 .lineToConstantHeading(new Vector2d(33.59, -4.37))
                 .lineToConstantHeading(new Vector2d(43, -4.37))
                 .lineTo(new Vector2d(47, -55))//y = - 64
-                .lineTo(new Vector2d(37, -53))//y = - 64
-                .lineTo(new Vector2d(37, -64))//y = - 64
+                .lineTo(new Vector2d(35, -51))//y = - 64
+                .lineTo(new Vector2d(35, -64))//y = - 64
                 .build();
        
        TrajectorySequence SecondFirstPush = drive.trajectorySequenceBuilder(FirstPush.end())
@@ -192,7 +193,7 @@ public class    Three_Specimen_Auto extends LinearOpMode {
             elevator.setTargetPosition(900); //old: 1400 put to all others reduced by 600
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         elevator.setPower(0.8);
-        sleep(1000);
+        sleep(500); // old 1000
         claw.setPosition(0.7);
         elevator.setTargetPosition(0);
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
@@ -209,6 +210,7 @@ public class    Three_Specimen_Auto extends LinearOpMode {
         elevator.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         sleep(500);
         claw.setPosition(1);
+        sleep(250);
         elevator.setTargetPosition(2000);                 //BACK TO SUBMERSIBLE
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION); //2nd SPECIMEN SCORED
         elevator.setPower(0.8);
@@ -231,6 +233,7 @@ public class    Three_Specimen_Auto extends LinearOpMode {
         //drive.followTrajectorySequence(backalittle);
         sleep(500);
         claw.setPosition(1);
+        sleep(250);
         elevator.setTargetPosition(2000);
         elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         elevator.setPower(0.8);
