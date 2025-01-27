@@ -225,7 +225,7 @@ public class TeleOPMyName extends LinearOpMode {
 //                telemetry.update();
 
             }
-
+//
 }*/                 //UNCOMMENTTTTT MANUAL ELEVATOR
 //            if (gamepad2.a) {  /* elevator down */ // might require boolean controller
 //                elevator.setPower(-0.8);
