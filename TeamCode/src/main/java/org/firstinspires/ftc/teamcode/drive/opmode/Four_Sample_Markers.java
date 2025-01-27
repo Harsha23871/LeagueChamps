@@ -64,7 +64,7 @@ public class Four_Sample_Markers extends LinearOpMode {
 
                     elevator.setTargetPosition(3400);
                     elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                    elevator.setPower(0.7);
+                    elevator.setPower(0.8);
                 })
                 .lineToLinearHeading(new Pose2d(-59, -61, Math.toRadians(45.00)))
                 .build();                         //-57   //-59
@@ -75,6 +75,10 @@ public class Four_Sample_Markers extends LinearOpMode {
         TrajectorySequence FirstGrab = drive.trajectorySequenceBuilder(trajectory0.end())
                 .lineToLinearHeading(new Pose2d(-52, -45, Math.toRadians(90.00)))
                 .addDisplacementMarker(() -> {
+
+                    elevator.setTargetPosition(0);
+                    elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+                    elevator.setPower(0.8);
                     armMotor.setTargetPosition(1300);
                     armMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
                     armMotor.setPower(0.8);
@@ -91,7 +95,7 @@ public class Four_Sample_Markers extends LinearOpMode {
                     armMotor.setPower(0.8);
                     elevator.setTargetPosition(3400);
                     elevator.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                    elevator.setPower(0.7);
+                    elevator.setPower(0.8);
                 })
 
                 .build();
